@@ -197,6 +197,29 @@ Your task is to create a table that calculates the proportion of missing values 
 
 ```{r}
 ### Explore missingness here ###
+glimpse(hcmst)
+hcmst |>
+  summarize(age_na = mean(is.na(subject_age)),
+            education_na = mean(is.na(subject_education)),
+            sex_na = mean(is.na(subject_sex)),
+            ethnicity_na = mean(is.na(subject_ethnicity)),
+            income_na = mean(is.na(subject_income_category)),
+            employment_na = mean(is.na(subject_employment_status)),
+            same_sex_na = mean(is.na(same_sex_couple)),
+            married_na = mean(is.na(married)),
+            sex_amount_na = mean(is.na(sex_frequency)),
+            flirts_na = mean(is.na(flirts_with_partner)),
+            fights_na = mean(is.na(fights_with_partner)),
+            duration_na = mean(is.na(relationship_duration)),
+            children_na = mean(is.na(children)),
+            rel_change_na = mean(is.na(rel_change_during_pandemic)),
+            inc_change = mean(is.na(inc_change_during_pandemic)),
+            subject_covid_na = mean(is.na(subject_had_covid)),
+            partner_covid_na = mean(is.na(partner_had_covid)),
+            subject_vac_na = mean(is.na(subject_vaccinated)),
+            partner_vac_na = mean(is.na(partner_vaccinated)),
+            covid_approach_na = mean(is.na(agree_covid_approach)),
+            quality_na = mean(is.na(relationship_quality)),)
 
 ```
 
@@ -220,6 +243,7 @@ Based on this definition, is missingness an issue for your analysis? If so, desc
 If missingness is not an issue, describe why.
 
 <!-------------------------- Start your work below ---------------------------->
+Meaningness is not an issue because the largest percent of missing data is around 5.7%. This value is also for sex amount which is a variable that is irrelevant to my analysis.
 
 
 
@@ -247,6 +271,14 @@ Show the first 6 rows of the tidied data.
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
+#selects only the relevant columns and saves the data set to clean_hcmst
+clean_hcmst <- hcmst |>
+  select(subject_age, flirts_with_partner, relationship_duration)
+
+#only displays the firts 6 rows of clean_hcmst
+clean_hcmst |>
+  slice_head(n=6)
+
 
 
 
@@ -264,6 +296,16 @@ Show the outputted table.
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
+clean_hcmst |>
+  mutate(mean_age = mean(subject_age, na.rm=TRUE),
+         min_age = min(subject_age, na.rm=TRUE),
+         max_age = max(subject_age, na.rm=TRUE),
+         mean_duration = mean(relationship_duration, na.rm=TRUE),
+         min_duration = min(relationship_duration, na.rm=TRUE),
+         max_duration = max(relationship_duration, na.rm=TRUE)) |>
+  select(mean_age, min_age, max_age,
+         mean_duration, min_duration, max_duration) |>
+  slice_head(n=1)
 
 
 

@@ -74,8 +74,10 @@ Out of the 5 data sets listed above, choose **2** that appeal to you based on th
 <!-------------------------- Start your work below ---------------------------->
 
 1: Write 1st choice here
+hcmst
 
 2: Write 2nd choice here
+wildfire
 
 
 <!----------------------------------------------------------------------------->
@@ -90,11 +92,24 @@ One way to narrowing down your selection is to *explore* the data sets. Use your
 #### Data Set 1
 ```{r}
 ### Explore 3 variables of data set 1 ###
+glimpse(hcmst)
+
+hcmst |>
+  summarize(avg_children = mean(children))
+
+hcmst |>
+  filter(flirts_with_partner == "every_day") |>
+  summarize(avg_duration_every = mean(relationship_duration, na.rm=TRUE))
+
+hcmst |>
+  filter(flirts_with_partner == "never") |>
+  summarize(avg_duration_never = mean(relationship_duration, na.rm=TRUE))
 
 ```
 
 
 Write your findings here.
+avg_children is the mean average amount of children that each subject has. avg_duration_every is the average duration, in years, of relationships in which the subject flirts with their partner every day. avg_duration_never is the average duration of relationships in which the subject never flirts with their partner.
 
 
 
@@ -102,11 +117,24 @@ Write your findings here.
 #### Data Set 2
 ```{r}
 ### Explore 3 variables of data set 2 ###
+glimpse(wildfire)
+
+wildfire |>
+  group_by(fire_type) |>
+  summarize(mean_spread_per_type = mean(fire_spread_rate, na.rm=TRUE))
+
+wildfire |>
+  group_by(wind_direction) |>
+  summarize(mean_spread_with_wind = mean(fire_spread_rate, na.rm=TRUE))
+
+wildfire |>
+  group_by(detection_agent_type) |>
+  summarize(detection_method_to_average_size_at_response = mean(fire_fighting_start_size, na.rm=TRUE))
 
 ```
 
 Write your findings here.
-
+mean-spread-per-type is the average rate of spread of the fire per type of fire. mean-spread-with-wind is the average rate of spread of the fire per each direction that the wind was blowing. detection_method_to_average_size_at_response groups each fire detection method and averages the size of the fire once the fire fighters first respond.
 
 
 
@@ -123,6 +151,8 @@ Write your findings here.
 It's time to choose only one data set. State the data set that you've chosen, and why you've chosen it.
 
 <!-------------------------- Start your work below ---------------------------->
+hcmst
+I found it interesting that couples who never flirt with each other tended to be in a relationship longer than couples who flirt every single day.
 
 
 
@@ -138,6 +168,7 @@ Write your research questions **as questions**, and be specific. You can change 
 > For example, if I had chosen a `titanic` data set for my project, I might ask, "(Primary) Is there a relationship between survival and the class of the passengers? (Secondary) Does this relationship differ by gender?"
 
 <!-------------------------- Start your work below ---------------------------->
+Is there a relationship between the amount that couples flirt with each other and the duration of a relationship? Does this relationship differ by age?
 
 
 
